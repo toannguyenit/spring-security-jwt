@@ -31,15 +31,18 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @ComponentScan(basePackages = {"vn.edu.likelion.app"})
 public class SecurityConfig {
 
-    @Autowired
-    private JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll() // Cho phép các endpoint liên quan đến auth
+                        .requestMatchers("/auth/**", "/home/**").permitAll() // Cho phép các endpoint liên quan đến auth
                         .requestMatchers("/admin/**").hasRole("ADMIN") // Chỉ cho phép ROLE_ADMIN truy cập
                         .requestMatchers("/user/**").hasAuthority("ROLE_USER") // Chỉ cho phép ROLE_USER truy cập
                         .anyRequest().authenticated() // Bảo vệ các request còn lại
@@ -50,9 +53,14 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
+    // Cấu hình AuthenticationManager nếu cần
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        return http.getSharedObject(AuthenticationManager.class);
+    }
 
 }

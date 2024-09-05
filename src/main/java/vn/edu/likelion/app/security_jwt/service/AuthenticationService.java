@@ -67,7 +67,7 @@ public class AuthenticationService {
         String password = request.getPassword();
         String account_name = "admin";
         String account_pass = "admin";
-        String account_role = "admin";
+        String account_role = "ADMIN";
 
         if (account_pass.equals(password) && username.equals(account_name)) {
             var token = generateToken(request.getUsername(), account_role);
