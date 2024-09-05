@@ -42,7 +42,7 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "/home/**").permitAll() // Cho phép các endpoint liên quan đến auth
+                        .requestMatchers("/auth/**", "/home/**", "api/v1/account/register").permitAll() // Cho phép các endpoint liên quan đến auth
                         .requestMatchers("/admin/**").hasRole("ADMIN") // Chỉ cho phép ROLE_ADMIN truy cập
                         .requestMatchers("/user/**").hasAuthority("ROLE_USER") // Chỉ cho phép ROLE_USER truy cập
                         .anyRequest().authenticated() // Bảo vệ các request còn lại
