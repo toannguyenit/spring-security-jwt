@@ -54,7 +54,6 @@ public class AuthenticationService {
     }
 
 //    public AuthenticationResponse authenticate(AuthenticationRequest request){
-
     // Tao mau test
 //        String username = request.getUsername();
 //        String password = request.getPassword();
@@ -72,7 +71,6 @@ public class AuthenticationService {
 //        else {
 //            throw new BadCredentialsException("Invalid username or password");
 //        }
-
 //    }
 
 
@@ -107,7 +105,6 @@ public class AuthenticationService {
 
         // Tao thong tin Header
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS512);
-
 
         // Tao thong tin Object
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder().subject(username) // Thong tin user dang nhap

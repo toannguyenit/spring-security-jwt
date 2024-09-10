@@ -1,5 +1,6 @@
 package vn.edu.likelion.app.security_jwt.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -12,6 +13,7 @@ import vn.edu.likelion.app.security_jwt.dto.response.AuthenticationResponse;
 @RequestMapping("/home")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Tag(name = "Home")
 public class HomeController {
 
     @GetMapping("/welcome")

@@ -24,6 +24,9 @@ public class Account extends BaseEntity implements UserDetails {
     @Column(nullable = false)
     String password;
 
+    @Column(nullable = false, unique = false)
+    String email;
+
     @Column(nullable = false)
     private String role;
 

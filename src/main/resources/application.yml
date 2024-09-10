@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: security-jwt
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/security_jwt?allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+    username: root
+    password: admin
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+
+jwt:
+  secretKey: hRy6mNjtLlBQyweNShjaj/PR7xu6sib9ISwZgu6alivZLc00hEp4mbAXPsxLc6se
+
+
+#config swagger
+openapi:
+  service:
+    api-docs: api-service
+    server: http://localhost:8080
+    title: API Service
+    version: 1.0.0
+
+application:
+  title: Security
+  version: 1.0.0
+
+springdoc:
+  pathsToMatch: /v1, /api/balance/**
+
+

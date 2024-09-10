@@ -1,6 +1,8 @@
 package vn.edu.likelion.app.security_jwt.controller;
 
 import com.nimbusds.jose.JOSEException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -23,11 +25,12 @@ import java.text.ParseException;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Tag(name = "Login")
 public class AuthenticationController {
 
 
     AuthenticationService authenticationService;
-
+    @Operation(method = "POST", summary = "Login", description = "Send a request via this API to login by username and pass")
     @PostMapping("/login")
     ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
         var result = authenticationService.authenticate(request);
