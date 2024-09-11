@@ -13,6 +13,19 @@ spring:
       ddl-auto: update
     open-in-view: false
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: toannguyen.hcmute@gmail.com
+    password: 'lenw viwd kpnm ckcv'  # Nhập App Password vào đây
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        debug: true
+
 
 jwt:
   secretKey: hRy6mNjtLlBQyweNShjaj/PR7xu6sib9ISwZgu6alivZLc00hEp4mbAXPsxLc6se

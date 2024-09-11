@@ -5,4 +5,5 @@ import vn.edu.likelion.app.security_jwt.entity.Account;
 
 public interface AccountService extends UserDetailsService {
     Account save(Account account);
+    Account update(Long id, Account account);
 }

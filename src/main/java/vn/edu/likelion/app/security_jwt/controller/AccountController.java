@@ -22,6 +22,12 @@ public class AccountController {
     }
 
     @Operation(method = "POST", summary = "Add new user", description = "Send a request via this API to create new user")
+    @PutMapping("/{id}")
+    public Account update(@PathVariable Long id, @RequestBody Account account) {
+        return accountService.update(id,account);
+    }
+
+    @Operation(method = "POST", summary = "Add new user", description = "Send a request via this API to create new user")
     @GetMapping("/register")
     public String register2() {
         return "Dang ky thanh cong!";

@@ -19,12 +19,32 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private PasswordStrengthService passwordStrengthService;
+
 
     @Override
     public Account save(Account account) {
+        if (!passwordStrengthService.isPasswordStrength(account.getPassword())) {
+            throw new RuntimeException("Mat khau khong du manh");
+        };
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         log.info(account.toString());
         return accountRepository.save(account);
+    }
+
+    @Override
+    public Account update(Long id, Account account) {
+        Account account1 = accountRepository.findById(id).orElseThrow(()->
+                new UsernameNotFoundException("Account not found"));
+
+        if (!passwordStrengthService.isPasswordStrength(account.getPassword())) {
+            throw new RuntimeException("Mat khau khong du manh");
+        };
+
+        account1.setPassword(passwordEncoder.encode(account.getPassword()));
+        account1.setEmail(account.getEmail());
+        return accountRepository.save(account1);
     }
 
     @Override
